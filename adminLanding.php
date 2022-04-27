@@ -37,12 +37,12 @@
     <hr>
   </div>
   <img src='egg.png' alt='Either Sonic stole my logo, or you are incapable of seeing how awesome it is!'>
-  <p> User: <?php echo $_SESSION['userName'] ?> </p>
+  <!-- <p> User: <?php echo $_SESSION['userName'] ?> </p> -->
   <table id='bois'>
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Grade</th>
+                <th>Submission</th>
             </tr>
         </thead>
         <tbody>
@@ -52,7 +52,15 @@
             ?>
                 <tr>
                     <td><?php echo $row['userName']?></td>
-                    <td><?php echo $row['grade']?></td>
+                    <td><?php if (file_exists('./submissions/' .$row['userName'] . '_assignment.txt')) {
+                        echo "<a href='./submissions/" . $row['userName'] .
+                        "_assignment.txt' download>
+                        <button type='button'>Download</button>
+                      </a>";
+                    } else {
+                        echo "Not yet submitted.";
+                    }?>
+                    </td>
                 </tr>
 
             <?php

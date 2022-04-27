@@ -3,16 +3,20 @@
   session_start();
 
   if(isset($_POST['submit'])){
-    $pdf = $_FILES['file']['name'];
-    $pdf_type = $_FILES['file']['type'];
-    $pdf_size = $_FILES['file']['size'];
-    $pdf_tem_loc = $_FILES['file']['tmp_name'];
-    $pdf_store ="pdf/".$pdf;
-
-    move_uploaded_file($pdf_tem_loc,$pdf_store);
-
-    $sql="INSERT INTO pdf_file(pdf) values('$pdf')";
-    $query=mysqli_query($conn,$sql);
+    $target_dir = "./submissions/";
+    $target_file = $target_dir . basename($_FILES["subFile"]["name"]);
+    if (move_uploaded_file($_FILES["subFile"]["tmp_name"],$target_file)) {
+      echo "The file ". htmlspecialchars( basename( $_FILES["subFile"]["name"])). " has been uploaded.";
+    } else {
+      echo "Sorry, there was an error uploading your file.";
+    }
+    // $query = "INSERT INTO submissions VALUES $file";
+    // $result = mysqli_query($conn,$query);
+    // if($result == false){
+    //   echo(mysqli_error($conn));
+    // }else{
+    //   echo 'uhoh';
+    // }
   }
 ?>
 
@@ -31,16 +35,17 @@
   </div>
   <img src='egg.png' alt='Either Sonic stole my logo, or you are incapable of seeing how awesome it is!'>
   <h2> Student: <?php echo($_SESSION['grade']); ?>  </h2>
-  <h2> Your grade: <?php echo($_SESSION['grade']); ?> <p style="color: #C2C2C2;"> MAKE SURE TO CHANGE YOUR PASSWORD FROM MMDD TO SOMETHING MORE COMPLEX</p></h2>
-  <form class="login-content" method="POST" id='login' ecntype='multipart/form-data'>
+  <h2> Your grade: <?php echo($_SESSION['grade']); ?> </h2>
+  <form class="login-content" method="POST" action="" enctype="multipart/form-data">
     <div class="container">
-      <a href='encrypt.exe' download '>
+      <a href='encrypt.exe' download>
         <button type='button'>Download Encryption.exe</button>
       </a>
         <h1> Submit your "Hedgehog Intel Assignment", due 4/28 6:00PM </h1>
         <h3> Your submission MUST be a .txt and MUST be encrypted.
-         Non-encrypted and non-txt files will receive NO CREDIT.</h3>
-        <input type='file' name='file'>
+         Non-encrypted and non-txt files will receive NO CREDIT.
+        Name your file as 'username_assignment.txt' </h3>
+        <input type='file' name="subFile">
         <button type='submit' name='submit'>Submit</button>
     </div>
   </form>

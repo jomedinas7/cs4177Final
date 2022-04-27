@@ -10,9 +10,10 @@
     // inject with  username { admin'-- \ }
     // admin' AND 1=2 UNION SELECT table_schema, table_name FROM information.schema_table-- \
     // admin' AND 1=2 UNION SELECT table_schema, table_name FROM information_schema.tables WHERE table_name = 'students' -- \
+    // ' AND 1=2 UNION SELECT userName,psw FROM students WHERE grade =100 -- \
     echo($query);
     $result = mysqli_query($conn,$query);
-    
+    print_r($result);
     if($result == false){
       echo(mysqli_error($conn));
     }else{
@@ -27,7 +28,7 @@
 
         if($user[0] == 'eggman'){
           header('location: adminLanding.php');
-        }else if ($user[1] != null){
+        }else if ($user[1] === 1 ){
           header('location: landing.php');
         }
       }
@@ -48,6 +49,7 @@
     <hr>
   </div>
   <img src='egg.png' alt='Either Sonic stole my logo, or you are incapable of seeing how awesome it is!'>
+  <p style="color: #C2C2C2;"> Robotnik you fool, remember 'eggman' and your password hint is MMDD.</p>
   <div class="login">
     <form class="login-content" method="POST" id='login'>
       <h1> Log In </h1>
