@@ -28,7 +28,7 @@
 
         if($user[0] == 'eggman'){
           header('location: adminLanding.php');
-        }else if ($user[1] === 1 ){
+        }else{
           header('location: landing.php');
         }
       }
@@ -49,7 +49,7 @@
     <hr>
   </div>
   <img src='egg.png' alt='Either Sonic stole my logo, or you are incapable of seeing how awesome it is!'>
-  <p style="color: #C2C2C2;"> Robotnik you fool, remember 'eggman' and your password hint is MMDD.</p>
+  <p style="color: #C2C2C2;"> Robotnik you fool, remember 'eggman' and your password hint .</p>
   <div class="login">
     <form class="login-content" method="POST" id='login'>
       <h1> Log In </h1>

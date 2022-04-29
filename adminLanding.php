@@ -51,14 +51,15 @@
             while($row = mysqli_fetch_array($results)) {
             ?>
                 <tr>
-                    <td><?php echo $row['userName']?></td>
+                    <td><?php if($row['userName'] != 'eggman'){ echo $row['userName']; }?></td>
                     <td><?php if (file_exists('./submissions/' .$row['userName'] . '_assignment.txt')) {
                         echo "<a href='./submissions/" . $row['userName'] .
                         "_assignment.txt' download>
                         <button type='button'>Download</button>
                       </a>";
-                    } else {
+                    } else if($row['userName'] != 'eggman'){
                         echo "Not yet submitted.";
+                        
                     }?>
                     </td>
                 </tr>
